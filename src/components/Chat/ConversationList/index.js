@@ -103,7 +103,7 @@ export default class extends Component {
       会話リストの一番下までスクロールされたときにfetchMoreが一度だけ呼ばれるようにしてください。
       (ヒント1: hasNextPageとloadingMoreを使います。)
       (ヒント2: DOMエレメントの高さなどいくつかの情報が必要です。)
-    */
+    *///
 
   }
 
