@@ -104,6 +104,21 @@ export default class extends Component {
       (ヒント1: hasNextPageとloadingMoreを使います。)
       (ヒント2: DOMエレメントの高さなどいくつかの情報が必要です。)
     *///
+    //scrollHeight 要素のスクロールビューの高さを表す数字を返す　＝　スクロールして読み取った高さ
+    //clientHeight 要素の内部の高さを表す数字を返す　＝　元のスタイルの高さ
+    //scrollTop 文書の上端がスクロールされた量をピクセル数で表す数字
+    const { 
+      fetchMore, 
+      hasNextPage, 
+      loadginMore 
+    } = this.props;
+
+    const wrapperHeight = e.element.clientHeight;
+    if(e.element.scrollHeight - e.element.scrollTop === wrapperHeight) {
+      return this.props.fetchMore;
+    } else {
+      return
+    }
 
   }
 
