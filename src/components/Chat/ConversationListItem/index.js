@@ -92,7 +92,7 @@ const ConversationListItem = ({
       </AvatarWrapper>
       <ChatUserWrapper>
         <ChatUserUpper>
-          <div class="chat-user-name">
+          <div className="chat-user-name">
             {conversation.user.name}
           </div>
           <LastChatTime>

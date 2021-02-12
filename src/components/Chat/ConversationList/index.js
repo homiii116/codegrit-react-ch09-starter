@@ -114,8 +114,8 @@ export default class extends Component {
     } = this.props;
 
     const wrapperHeight = e.element.clientHeight;
-    if(e.element.scrollHeight - e.element.scrollTop === wrapperHeight) {
-      return this.props.fetchMore;
+    if(e.element.scrollHeight - e.element.scrollTop === wrapperHeight && hasNextPage) {
+      return fetchMore;
     } else {
       return
     }
