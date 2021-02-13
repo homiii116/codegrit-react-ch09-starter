@@ -113,13 +113,14 @@ export default class extends Component {
       loadginMore 
     } = this.props;
 
-    const wrapperHeight = e.element.clientHeight;
-    if(e.element.scrollHeight - e.element.scrollTop === wrapperHeight && hasNextPage) {
+    const wrapperHeight = ReactDOM.findDOMNode(this.chatListBox);
+    // const wrapperHeight = e.element.clientHeight;
+
+    if(element.scrollHeight - element.scrollTop === wrapperHeight && hasNextPage) {
       return fetchMore;
     } else {
       return
     }
-
   }
 
   render() {
