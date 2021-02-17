@@ -58,7 +58,7 @@ const LoadMore = ({
       <LoadMoreBox>
         <LoadMoreMessage 
           hasMore={true}
-          onClick={fetchMore}>更に読み込む</LoadMoreMessage>
+          onScroll={fetchMore}>更に読み込む</LoadMoreMessage>
       </LoadMoreBox>
     );
   }
@@ -110,16 +110,18 @@ export default class extends Component {
     const { 
       fetchMore, 
       hasNextPage, 
-      loadginMore 
+      loadingMore 
     } = this.props;
 
-    const wrapperHeight = ReactDOM.findDOMNode(this.chatListBox);
+    const wrapperHeight = findDOMNode(this.chatListBox.current);
     // const wrapperHeight = e.element.clientHeight;
 
-    if(element.scrollHeight - element.scrollTop === wrapperHeight && hasNextPage) {
+    // 読み込むページがない場合、何も返さない
+    if (!hasNextPage && loadingMore) return;
+
+    if(wrapperHeight.scrollHeight - wrapperHeight.scrollTop === wrapperHeight.clientHeight) {
+      console.log(wrapperHeight.clientHeight);
       return fetchMore;
-    } else {
-      return
     }
   }
 
