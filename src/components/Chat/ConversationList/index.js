@@ -54,13 +54,13 @@ const LoadMore = ({
     );
   }
   if (hasNextPage) {
-    return (
-      <LoadMoreBox>
-        <LoadMoreMessage 
-          hasMore={true}
-          onScroll={fetchMore}>更に読み込む</LoadMoreMessage>
-      </LoadMoreBox>
-    );
+    // return (
+    //   <LoadMoreBox>
+    //     <LoadMoreMessage 
+    //       hasMore={true}
+    //       onClick={fetchMore}>更に読み込む</LoadMoreMessage>
+    //   </LoadMoreBox>
+    // );
   }
   return (
     <LoadMoreBox>
@@ -114,7 +114,6 @@ export default class extends Component {
     } = this.props;
 
     const wrapperHeight = findDOMNode(this.chatListBox.current);
-    // const wrapperHeight = e.element.clientHeight;
 
     // 読み込むページがない場合、何も返さない
     if (!hasNextPage && loadingMore) return;
