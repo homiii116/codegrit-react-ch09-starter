@@ -9,8 +9,8 @@ import ConversationListItem from '../ConversationListItem';
 import { ReactComponent as Loader } from '../../../images/loading.svg';
 
 const ConversationListWrapper = styled.ul({
-  "height": "360px",
-  "width": "360px",
+  "height": "340px",
+  "width": "340px",
   "overflowY": "scroll",
   "display": "flex",
   "flexDirection": "column",
@@ -54,13 +54,13 @@ const LoadMore = ({
     );
   }
   if (hasNextPage) {
-    // return (
-    //   <LoadMoreBox>
-    //     <LoadMoreMessage 
-    //       hasMore={true}
-    //       onClick={fetchMore}>更に読み込む</LoadMoreMessage>
-    //   </LoadMoreBox>
-    // );
+    return (
+      <LoadMoreBox>
+        <LoadMoreMessage 
+          hasMore={true}
+          onClick={fetchMore}>更に読み込む</LoadMoreMessage>
+      </LoadMoreBox>
+    );
   }
   return (
     <LoadMoreBox>
@@ -95,7 +95,15 @@ export default class extends Component {
     }
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    const chatListBox = this.chatListBox.current;
+    if (chatListBox) {
+      const el = findDOMNode(chatListBox);
+      // スクロールイベントリスナー除去
+      // 模範解答は引数がイベントの種類だけだが、それだとログアウトの時にエラーが出る
+      el.removeEventListener('scroll', this.handleScroll);
+    }
+  }
 
   handleScroll = (e) => {
     /* 
@@ -120,7 +128,7 @@ export default class extends Component {
 
     if(wrapperHeight.scrollHeight - wrapperHeight.scrollTop === wrapperHeight.clientHeight) {
       console.log(wrapperHeight.clientHeight);
-      return fetchMore;
+      return fetchMore();
     }
   }
 
