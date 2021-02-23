@@ -10,7 +10,7 @@ import { ReactComponent as Loader } from '../../../images/loading.svg';
 
 const ConversationListWrapper = styled.ul({
   "height": "340px",
-  "width": "340px",
+  "width": "360px",
   "overflowY": "scroll",
   "display": "flex",
   "flexDirection": "column",
@@ -124,7 +124,9 @@ export default class extends Component {
     const wrapperHeight = findDOMNode(this.chatListBox.current);
 
     // 読み込むページがない場合、何も返さない
-    if (!hasNextPage && loadingMore) return;
+    if (loadingMore) return;
+
+    if (!hasNextPage) return;
 
     if(wrapperHeight.scrollHeight - wrapperHeight.scrollTop === wrapperHeight.clientHeight) {
       console.log(wrapperHeight.clientHeight);
