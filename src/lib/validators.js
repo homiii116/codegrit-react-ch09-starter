@@ -13,6 +13,7 @@ export const emailValidator = (val) => {
   })
 }
 
+//今回使わない
 export const nameValidator = (val) => {
   return new Promise((resolve) => {
     let error = null;
