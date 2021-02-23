@@ -107,7 +107,8 @@ export default class extends Component {
         {({
           errors,
           handleSubmit,
-          isSubmitting,
+          isSubmitting,　
+          //isSubmiting確認
         }) => {
           return (
             <Form onSubmit={handleSubmit} css={formStyle}>
