@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import styled from '@emotion/styled/macro';
-import css from '@emotion/css/macro'
 import { jsx } from '@emotion/core'
 import ConversationListItem from '../ConversationListItem';
 import { ReactComponent as Loader } from '../../../images/loading.svg';

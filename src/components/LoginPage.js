@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import React, { Component } from 'react';
 import styled from '@emotion/styled/macro';
+import { jsx } from '@emotion/core';
 import { Button } from 'react-bootstrap';
 import { emailValidator, passwordValidator } from './../lib/validators';
 import { Formik, Form, Field } from 'formik';
@@ -9,7 +11,7 @@ const Wrapper = styled.div({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  height: 'auto',
+  // height: 'auto',
   width: 400,
   height: 400,
   padding: 20,
@@ -37,61 +39,62 @@ const CustomLabel = styled.label({
   fontSize: '0.9em',
 })
 
-const handleSubmit = (values, actions) => {
-  mockSignup(values)
-  .then(data => {
-    actions.setSubmitting(false)
-    alert(data.message)
-  })
-  .catch((error) => {
-    const errors = {
-      server: error.message
-    }
-    actions.setSubmitting(false);
-    actions.setErrors(errors);
-  })
-}
 
-const validate = (({ email, password }) => {
-  return Promise.all([
-    passwordValidator(password),
-    emailValidator(email),
-  ])
-  .then((results) => {
-    const errors = {}
-    results.forEach(result => {
-      if(result.error) {
-        errors[result.type] = result.error
-      }
-    })
-    if(Object.keys(errors).length > 0) {
-      throw errors
-    }
-  })
-})
-
-function mockSignup(values) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const randomNum = Math.floor(Math.random() * 10)
-      if(randomNum <= 1) {
-        resolve({
-          success: true,
-          message: 'ログインに成功しました。'
-        })
-      } else {
-        reject({
-          success: false,
-          message: 'ネットワークエラーが発生しました。'
-        })
-      }
-    }, 2000)
-  })
-}
 
 export default class extends Component {
-  render() {
+  mockSignup(values) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const randomNum = Math.floor(Math.random() * 10)
+        if(randomNum <= 1) {
+          resolve({
+            success: true,
+            message: 'ログインに成功しました。'
+          })
+        } else {
+          reject({
+            success: false,
+            message: 'ネットワークエラーが発生しました。'
+          })
+        }
+      }, 2000)
+    })
+  }
 
+  handleSubmit = (values, actions) => {
+    this.mockSignup(values)
+    .then(data => {
+      actions.setSubmitting(false)
+      alert(data.message)
+    })
+    .catch((error) => {
+      const errors = {
+        server: error.message
+      }
+      actions.setSubmitting(false);
+      actions.setErrors(errors);
+    })
+  }
+  
+  validate = (({ email, password }) => {
+    return Promise.all([
+      passwordValidator(password),
+      emailValidator(email),
+    ])
+    .then((results) => {
+      const errors = {}
+      results.forEach(result => {
+        if(result.error) {
+          errors[result.type] = result.error
+        }
+      })
+      if(Object.keys(errors).length > 0) {
+        throw errors
+      }
+    })
+  })
+
+  render() {
     return (    
     <Wrapper>
       <Formik
@@ -101,8 +104,8 @@ export default class extends Component {
           email: '',
           password: '',
         }}
-        validate={validate}
-        onSubmit={handleSubmit}
+        validate={this.validate}
+        onSubmit={this.handleSubmit}
       >
         {({
           errors,
